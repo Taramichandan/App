@@ -25,4 +25,7 @@ def login_view(req):
     pass
 
 def logout_view(req):
-    pass
+    logout(req)
+    messages.success(req,"You are successfully logout")
+
+    return redirect('home')
