@@ -2,7 +2,7 @@ from django.shortcuts import render , redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate , login , logout
 from django.contrib import messages
-from .forms import Registration
+from .forms import Registration , AddClientform
 from .models import Client
 
 def home(req):
@@ -74,3 +74,24 @@ def client_delet(req,pk):
     else : 
         messages.success(req,' YOu need to login first ...')
         return redirect('home')
+    
+def add_client(req):
+
+    form = AddClientform(req.POST or None)
+
+   
+    if req.user.is_authenticated:
+        
+        if req.method == 'POST':
+            if form.is_valid():  # <-- fixed here
+                client = form.save(commit=False)
+                client.user = req.user  # assuming Client model has a `user` field
+                client.save()
+                messages.success(req, 'You have successfully added the new record ......')
+                return redirect('home')
+        return render(req, 'add_client.html', {'form': form})  # render if not POST or form invalid
+
+    else:
+        messages.success(req, 'You have to login to add new record .......')
+        return redirect('home')
+       
