@@ -52,3 +52,25 @@ def logout_view(req):
     messages.success(req,"You are successfully logout")
 
     return redirect('home')
+
+def client(req,pk):
+    if req.user.is_authenticated:
+        # look up the specific client data
+        client_record = Client.objects.get(id=pk)
+        return render(req,'client.html',{'client_record': client_record})
+    
+    else:
+        messages.success(req,' You have to login......')
+        return redirect ('home')
+    
+
+def client_delet(req,pk):
+    if req.user.is_authenticated:
+        delet_record = Client.objects.get(id=pk)
+        delet_record.delete()
+        messages.success(req, " You have successfully deleted")
+        return redirect('home')    
+    
+    else : 
+        messages.success(req,' YOu need to login first ...')
+        return redirect('home')

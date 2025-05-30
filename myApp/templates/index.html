@@ -9,11 +9,12 @@
 
             <h1> Client List </h1>
 
-        {% if clients%}
+        {% if clients %}
 
         {% for client in clients %} <br>
 
-        {{client}}
+        <a href="{% url 'client' client.id %}">{{client.first_name}}</a>
+        
 
         {% endfor %}
 

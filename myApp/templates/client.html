@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+
+    <h1>Client Info : </h1>
+
+    <div class="card">
+        <h5 class="card-header">{{client_record.first_name}}</h5>
+        <div class="card-body">
+            <h5 class="card-title">{{client_record.email}}</h5>
+            <p class="card-text">{{client_record.phone}}</p>
+            <a href="{% url 'home' %}" class="btn btn-primary">Go Back</a>
+            <a href="{% url 'client_delet' client_record.id %}" class="btn btn-danger">Delet</a>
+        </div>
+    </div>
+
+    {% endblock %}
