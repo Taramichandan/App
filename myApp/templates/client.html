@@ -10,7 +10,8 @@
             <h5 class="card-title">{{client_record.email}}</h5>
             <p class="card-text">{{client_record.phone}}</p>
             <a href="{% url 'home' %}" class="btn btn-primary">Go Back</a>
-            <a href="{% url 'client_delet' client_record.id %}" class="btn btn-danger">Delet</a>
+            <a href="{% url 'client_delet' client_record.id %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'client_update' client_record.id %}" class="btn btn-secondary">Update</a>
         </div>
     </div>
 

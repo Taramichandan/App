@@ -74,6 +74,24 @@ def client_delet(req,pk):
     else : 
         messages.success(req,' YOu need to login first ...')
         return redirect('home')
+
+
+def client_update(req , pk):
+    if req.user.is_authenticated : 
+        current_record = Client.objects.get(id=pk)
+        form = AddClientform(req.POST or None , instance = current_record)
+        if req.method == 'POST':
+            if form.is_valid :
+                update_client = form.save()
+                messages.success(req , 'Client info updated ..... ')
+                return redirect('home')
+        return render(req, 'client_update.html' , {'form' : form})
+    
+    else:
+        messages.success(req , 'You have to login first .....')
+        return redirect('home')
+    
+
     
 def add_client(req):
 
